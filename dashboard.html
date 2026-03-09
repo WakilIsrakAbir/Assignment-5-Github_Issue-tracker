@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Issues Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100">
+    <!-- NAVBAR -->
+    <nav class="w-full h-[80px] bg-white  flex items-center justify-between px-10">
+        <div class="flex items-center gap-2">
+            <img src="assets/github-logo.png" class="w-9">
+            <h1 class="text-[1.5rem] font-semibold text-gray-800">
+                GitHub Issues Tracker
+            </h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- SEARCH INPUT -->
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                <input id="searchInput" type="text" placeholder="Search issues..." onkeyup="searchIssues()"
+                    class="w-[240px] h-[36px] border border-gray-300 rounded-md pl-9 pr-3 text-sm" />
+            </div>
+            <!-- NEW ISSUE BUTTON -->
+            <button class="bg-indigo-700 text-white text-sm px-4 h-[36px] rounded-md flex items-center gap-1">
+                <i class="fa-solid fa-plus text-xs"></i>
+                New Issue
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <div class="max-w-6xl mx-auto mt-6">
+        <!-- TABS -->
+        <div class="bg-white rounded-lg p-4 mb-4 flex gap-2">
+            <button onclick="showAll()" id="tabAll" class="px-4 py-1 bg-indigo-700 text-white rounded-md text-sm">
+                All
+            </button>
+            <button onclick="showOpen()" id="tabOpen" class="px-4 py-1 bg-gray-100 rounded-md text-sm">
+                Open
+            </button>
+            <button onclick="showClosed()" id="tabClosed" class="px-4 py-1 bg-gray-100 rounded-md text-sm">
+                Closed
+            </button>
+        </div>
+        <!-- ISSUES HEADER -->
+        <div class="bg-white rounded-lg shadow-sm p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                    <img src="assets/Aperture.png" class="w-5">
+                </div>
+                <div>
+                    <h2 id="issueCount" class="text-[16px] font-semibold text-gray-800">
+                        0 Issues
+                    </h2>
+                    <p class="text-sm text-gray-500">
+                        Track and manage your project issues
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-sm">
+                <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+                    <span class="text-gray-600">Open</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 bg-purple-500 rounded-full"></div>
+                    <span class="text-gray-600">Closed</span>
+                </div>
+            </div>
+        </div>
+        <!-- SPINNER -->
+        <div id="spinner" class="text-center my-6 hidden">
+            Loading...
+        </div>
+        <!-- ISSUE GRID -->
+        <div id="issuesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
+        </div>
+    </div>
+    <!-- MODAL -->
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-xl w-[500px] shadow-lg">
+            <!-- Title -->
+            <h2 id="modalTitle" class="text-xl font-bold mb-2"></h2>
+            <!-- Description -->
+            <p id="modalDescription" class="text-gray-600 text-sm mb-4"></p>
+            <!-- Info Section -->
+            <div class="space-y-2 text-sm">
+                <p id="modalAuthor" class="text-gray-700"></p>
+                <p>
+                    Priority:
+                    <span id="modalPriority"
+                        class="px-2 py-1 text-xs rounded bg-red-100 text-red-600 font-medium"></span>
+                </p>
+
+                <p>
+                    Status:
+                    <span id="modalStatus" class="px-2 py-1 text-xs rounded bg-gray-200"></span>
+                </p>
+            </div>
+
+            <!-- Button -->
+            <div class="flex justify-end mt-5">
+                <button onclick="closeModal()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="js/issues.js"></script>
+
+</body>
+</html>
